@@ -63,16 +63,25 @@ fun Navigation() {
         }
 
         // ToDo 7: Add more nav screens here for the pizza party and gpa calculator
-
+        composable("pizza Party") {
+        ThirdScreen(navController)
+    }
+        composable("GPA Calc") {
+            FourthScreen(navController)
+        }
 
     }
 
 }
 
+
+
 @Composable
 fun FirstScreen(navController: NavController) {
     Box (contentAlignment = Alignment.Center){
-        Column ( modifier = Modifier.padding(horizontal = 20.dp).wrapContentSize(),
+        Column ( modifier = Modifier
+            .padding(horizontal = 20.dp)
+            .wrapContentSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally){
             Text(text = "First Screen")
@@ -84,9 +93,6 @@ fun FirstScreen(navController: NavController) {
         }
     }
 }
-
-
-
 
 @Composable
 fun SecondScreen(navController: NavController) {
@@ -110,6 +116,29 @@ fun SecondScreen(navController: NavController) {
     }
 
 }
+
+@Composable
+fun ThirdScreen(navController: NavController) {
+    Box (contentAlignment = Alignment.Center){
+        Column ( modifier = Modifier
+            .padding(horizontal = 20.dp)
+            .wrapContentSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally){
+            Text(text = "Pizza Screen")
+
+            Button(onClick = { navController.navigate("third_screen") }) {
+                Text(text ="Go to pizza Screen")
+            }
+        }
+    }
+}
+
+@Composable
+fun FourthScreen(navController: NavController) {
+
+}
+
 
 @Composable
 fun SpalshScreen(navController: NavController){

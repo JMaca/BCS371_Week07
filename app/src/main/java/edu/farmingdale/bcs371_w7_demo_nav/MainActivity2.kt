@@ -30,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat.startActivity
 import edu.farmingdale.bcs371_w7_demo_nav.ui.theme.BCS371_W7_Demo_NavTheme
 
 class MainActivity2 : ComponentActivity() {
@@ -69,6 +70,7 @@ fun BasicOperations(name: String, modifier: Modifier = Modifier) {
         Button( onClick = {
             val newInt = Intent(Intent.ACTION_VIEW)
             // ToDo 1: create implicit intent to open a web page or call a phone number
+            newInt.setData(Uri.parse("www.farmingdale.edu"))
             context.startActivity(newInt)
         },
             modifier= Modifier.padding(start = 40.dp, end = 40.dp)) {
@@ -80,22 +82,25 @@ fun BasicOperations(name: String, modifier: Modifier = Modifier) {
 
         Button( onClick = {
             // ToDo 2: create explicit intent to open a new activity
-            context.startActivity(Intent(context, MainActivity::class.java))
+            val intent = Intent(context, MainActivity::class.java)
+            context.startActivity(intent)
         },
             modifier= Modifier.padding(start = 40.dp, end = 40.dp)) {
             Icon( imageVector = Icons.Default.Info, contentDescription = "Phone")
             Text("Go To activity 2")
         }
-
         // ToDo 3: Change the spacing between the icons and text to be 10dp
+
         // ToDo 4: Add a horizontal divider between the buttons
+        HorizontalDivider(thickness = DividerDefaults.Thickness)
 
 
         // ToDo 5: This switch is not working fix it
         Switch(
             checked = true,
             onCheckedChange = {  },
-            modifier = Modifier.padding(10.dp),
+            modifier = Modifier.padding(10.dp)
+
         )
         // ToDo 6: when the switch is off, disable the buttons
     }
