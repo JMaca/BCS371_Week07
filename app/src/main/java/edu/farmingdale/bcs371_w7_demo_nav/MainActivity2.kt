@@ -26,11 +26,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.traceEventEnd
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat.startActivity
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import edu.farmingdale.bcs371_w7_demo_nav.ui.theme.BCS371_W7_Demo_NavTheme
 
 class MainActivity2 : ComponentActivity() {
@@ -52,6 +55,7 @@ class MainActivity2 : ComponentActivity() {
 
 @Composable
 fun BasicOperations(name: String, modifier: Modifier = Modifier) {
+    val navigationController = rememberNavController()
     val  context = LocalContext.current
 
     Column {
@@ -63,7 +67,8 @@ fun BasicOperations(name: String, modifier: Modifier = Modifier) {
         },
             modifier= Modifier.padding(start = 40.dp, end = 40.dp)) {
             Icon( imageVector = Icons.Default.LocationOn, contentDescription = "Location")
-            Text("Show me  Farmingdale")
+            Text("Show me Farmingdale",
+                modifier = Modifier.padding(10.dp))
         }
         HorizontalDivider(thickness = DividerDefaults.Thickness)
 
@@ -75,7 +80,8 @@ fun BasicOperations(name: String, modifier: Modifier = Modifier) {
         },
             modifier= Modifier.padding(start = 40.dp, end = 40.dp)) {
             Icon( imageVector = Icons.Default.Phone, contentDescription = "Phone")
-            Text("Call Me")
+            Text("Call Me",
+                modifier = Modifier.padding(10.dp))
         }
 
         HorizontalDivider(thickness = DividerDefaults.Thickness)
@@ -87,21 +93,45 @@ fun BasicOperations(name: String, modifier: Modifier = Modifier) {
         },
             modifier= Modifier.padding(start = 40.dp, end = 40.dp)) {
             Icon( imageVector = Icons.Default.Info, contentDescription = "Phone")
-            Text("Go To activity 2")
+            Text("Go To activity 2",
+                modifier = Modifier.padding(10.dp))
+        }
+
+        HorizontalDivider(thickness = DividerDefaults.Thickness)
+
+        Button( onClick = {
+                navigationController.navigate("pizza_party")
+        },
+            modifier= Modifier.padding(start = 40.dp, end = 40.dp)) {
+            Icon( imageVector = Icons.Default.Info, contentDescription = "Phone")
+            Text("Go To Pizza",
+                modifier = Modifier.padding(10.dp))
+        }
+
+        HorizontalDivider(thickness = DividerDefaults.Thickness)
+
+        Button( onClick = {
+            navigationController.navigate("gpa_calc")
+        },
+            modifier= Modifier.padding(start = 40.dp, end = 40.dp)) {
+            Icon( imageVector = Icons.Default.Info, contentDescription = "Phone")
+            Text("Go To Gpa",
+                modifier = Modifier.padding(10.dp))
         }
         // ToDo 3: Change the spacing between the icons and text to be 10dp
-
+            // added to each text  modifier = Modifier.padding(10.dp))
         // ToDo 4: Add a horizontal divider between the buttons
         HorizontalDivider(thickness = DividerDefaults.Thickness)
 
-
+    var isEnabled by remember { mutableStateOf(true) }
         // ToDo 5: This switch is not working fix it
         Switch(
-            checked = true,
-            onCheckedChange = {  },
-            modifier = Modifier.padding(10.dp)
-
+            checked = isEnabled,
+            onCheckedChange = { isEnabled = it },
+            modifier = Modifier.padding(30.dp),
+            enabled = false
         )
+
         // ToDo 6: when the switch is off, disable the buttons
     }
 

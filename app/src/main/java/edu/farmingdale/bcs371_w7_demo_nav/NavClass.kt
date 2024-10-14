@@ -63,10 +63,10 @@ fun Navigation() {
         }
 
         // ToDo 7: Add more nav screens here for the pizza party and gpa calculator
-        composable("pizza Party") {
+        composable("pizza_party") {
         ThirdScreen(navController)
     }
-        composable("GPA Calc") {
+        composable("gpa_calc") {
             FourthScreen(navController)
         }
 
@@ -97,6 +97,7 @@ fun FirstScreen(navController: NavController) {
 @Composable
 fun SecondScreen(navController: NavController) {
     var sliderValue by remember { mutableStateOf(0.5f) }
+    var isChecked by remember { mutableStateOf(false) }
 
     val context = LocalContext.current
     Column ( modifier = Modifier.padding(horizontal = 20.dp),
@@ -111,31 +112,21 @@ fun SecondScreen(navController: NavController) {
         }
 
         // ToDo 8: when the switch is off, disable the slider
-        Checkbox(checked = true, onCheckedChange = {  }, modifier = Modifier.padding(10.dp))
-
+        Checkbox(checked = isChecked, onCheckedChange = { isChecked = it  }, modifier = Modifier.padding(10.dp))
+        //disable slider
     }
 
 }
 
 @Composable
 fun ThirdScreen(navController: NavController) {
-    Box (contentAlignment = Alignment.Center){
-        Column ( modifier = Modifier
-            .padding(horizontal = 20.dp)
-            .wrapContentSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally){
-            Text(text = "Pizza Screen")
-
-            Button(onClick = { navController.navigate("third_screen") }) {
-                Text(text ="Go to pizza Screen")
-            }
-        }
-    }
+    val modifier = Modifier.padding(10.dp)
+    PizzaPartyScreen(modifier , navController)
 }
 
 @Composable
 fun FourthScreen(navController: NavController) {
+    gpaappFun(navController)
 
 }
 
